@@ -54,12 +54,12 @@ base = "https://www.si.umich.edu"#/node/9942"
 baseurl = 'https://www.si.umich.edu/directory?field_person_firstname_value=&field_person_lastname_value=&rid=4'
 i = 1
 while True:
-	r = requests.get(baseurl)
+	r = requests.get(baseurl, headers={'User-Agent': 'SI_CLASS'})
 	soup = BeautifulSoup(r.text, "html.parser")
 
 	for div in soup.find_all(class_ = "field-name-contact-details"):
 		baseurl = base + div.a["href"]
-		r = requests.get(baseurl)
+		r = requests.get(baseurl, headers={'User-Agent': 'SI_CLASS'})
 		soup_div = BeautifulSoup(r.text, "html.parser")
 		
 		div_email = soup_div.find_all(class_ = "field-name-field-person-email")[0]
